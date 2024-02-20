@@ -23,8 +23,8 @@ struct ContentView: View {
                 Button("Start", action: startTimer)
             } else {
                 Button("Pause", action: pauseTimer)
-                Button("Stop", action: stopTimer)
             }
+            Button("Stop", action: stopTimer)
         }
     }
     
