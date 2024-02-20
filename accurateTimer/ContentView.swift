@@ -48,7 +48,8 @@ struct ContentView: View {
         if let startTime = self.startTime {
             timer?.invalidate()
             self.startTime = nil
-            timeBeforePause += -startTime.timeIntervalSinceNow
+            timeBeforePause += elapsedTime
+            elapsedTime = 0.0
         }
     }
     
@@ -61,3 +62,4 @@ struct ContentView: View {
     }
     
 }
+
