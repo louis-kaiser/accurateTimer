@@ -33,6 +33,7 @@ struct ContentView: View {
         let minutes = Int(totalElapsedTime) / 60
         let seconds = Int(totalElapsedTime) % 60
         return String(format: "%02d:%02d", minutes, seconds)
+        //return String(totalElapsedTime)
     }
     
     private func startTimer() {
@@ -45,12 +46,10 @@ struct ContentView: View {
     }
     
     private func pauseTimer() {
-        if let startTime = self.startTime {
-            timer?.invalidate()
-            self.startTime = nil
-            timeBeforePause += elapsedTime
-            elapsedTime = 0.0
-        }
+        timer?.invalidate()
+        self.startTime = nil
+        timeBeforePause += elapsedTime
+        elapsedTime = 0.0
     }
     
     private func stopTimer() {
