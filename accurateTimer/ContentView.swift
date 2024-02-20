@@ -29,8 +29,9 @@ struct ContentView: View {
     }
     
     private var formattedElapsedTime: String {
-        let minutes = Int(elapsedTime) / 60
-        let seconds = Int(elapsedTime) % 60
+        let totalElapsedTime = elapsedTime + timeBeforePause
+        let minutes = Int(totalElapsedTime) / 60
+        let seconds = Int(totalElapsedTime) % 60
         return String(format: "%02d:%02d", minutes, seconds)
     }
     
@@ -38,17 +39,16 @@ struct ContentView: View {
         startTime = Date()
         timer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { _ in
             if let startTime = self.startTime {
-                self.elapsedTime = (-startTime.timeIntervalSinceNow + self.timeBeforePause)
+                self.elapsedTime = -startTime.timeIntervalSinceNow
             }
         }
     }
     
     private func pauseTimer() {
         if let startTime = self.startTime {
-            self.timeBeforePause = (-startTime.timeIntervalSinceNow + self.timeBeforePause)
             timer?.invalidate()
             self.startTime = nil
-            elapsedTime = timeBeforePause
+            timeBeforePause += -startTime.timeIntervalSinceNow
         }
     }
     
